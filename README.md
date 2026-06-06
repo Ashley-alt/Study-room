@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Study Room
+
+Study Room is a cozy Bible study focus app inspired by the feeling of older lo-fi room experiences, but with original artwork, layout, and interaction design. It is built as a frontend-only MVP with scripture prompts, notes, prayer points, reflection questions, a Pomodoro timer, a study checklist, and ambient audio controls.
+
+## Tech Stack
+
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Zustand
+- LocalStorage persistence
+- No backend
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build for production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+Run lint:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/` - landing page for the app
+- `/study` - interactive Bible study room
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+src/app/page.tsx                 Landing page
+src/app/study/page.tsx           Study room route
+src/components/study/            Study room UI components
+src/lib/study-data.ts            Mock scripture, reflections, prayer points, audio paths
+src/store/study-room-store.ts    Zustand store with localStorage persistence
+public/audio/README.md           Placeholder audio asset notes
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Replacing Assets
+
+The MVP uses CSS and Framer Motion for the room artwork and animations, so there are no copyrighted image or video assets.
+
+Audio paths are placeholders in `src/lib/study-data.ts`:
+
+- `/audio/lofi-placeholder.mp3`
+- `/audio/rain-placeholder.mp3`
+- `/audio/fireplace-placeholder.mp3`
+- `/audio/wind-placeholder.mp3`
+- `/audio/coffee-shop-placeholder.mp3`
+- `/audio/page-turning-placeholder.mp3`
+
+Add royalty-free audio files to `public/audio/` with those names, or update the paths in `src/lib/study-data.ts`.
+
+## LocalStorage
+
+The app stores user preferences under `study-room-preferences`, including:
+
+- day/night theme
+- selected study topic
+- notes
+- checklist tasks
+- completed study sessions
+- timer durations
+- music and ambience settings
+
+## MVP Notes
+
+The audio mixer currently provides the full UI and saved settings for placeholder paths. Once real royalty-free audio files are added, the mixer can be extended to instantiate and sync HTML audio elements against the existing Zustand state.
